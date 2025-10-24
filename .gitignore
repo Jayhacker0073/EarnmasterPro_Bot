@@ -1,0 +1,37 @@
+# Environment variables
+.env
+BOT_TOKEN
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# User data (if using JSON fallback)
+users_data.json
+withdrawals.json
+
+# Firebase credentials (IMPORTANT - Never commit!)
+firebase-credentials.json
+serviceAccountKey.json
+
+# Local test files
+*.bat
