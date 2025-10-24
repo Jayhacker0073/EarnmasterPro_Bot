@@ -56,7 +56,20 @@ FIREBASE_CREDS_PATH = os.path.join(CURRENT_DIR, 'firebase-credentials.json')
 
 # Initialize Firebase
 try:
-    cred = credentials.Certificate(FIREBASE_CREDS_PATH)
+    # Try to load from environment variable first (for Render deployment)
+    firebase_creds_json = os.environ.get('FIREBASE_CREDENTIALS_JSON')
+    
+    if firebase_creds_json:
+        # Parse JSON from environment variable
+        import json
+        firebase_creds = json.loads(firebase_creds_json)
+        cred = credentials.Certificate(firebase_creds)
+        print("✅ Loading Firebase credentials from environment variable")
+    else:
+        # Fall back to file (for local development)
+        cred = credentials.Certificate(FIREBASE_CREDS_PATH)
+        print("✅ Loading Firebase credentials from file")
+    
     firebase_admin.initialize_app(cred)
     db = firestore.client()
     print("✅ Firebase initialized successfully!")
